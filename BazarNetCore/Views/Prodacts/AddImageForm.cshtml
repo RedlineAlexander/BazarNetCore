@@ -1,0 +1,12 @@
+﻿@model BazarNetCore.Models.Prodacts
+@{
+    ViewData["Title"] = "AddImageForm";
+}
+
+<h1>AddImageForm</h1>
+
+<form asp-controller="Prodacts" asp-action="AddImage" method="post" enctype="multipart/form-data">
+    <input asp-for="id" readonly class="control-label"></input>
+    <input type="file" name="uploads" /><br>
+    <input type="submit" value="Загрузить" class="btn btn-primary" />
+</form>
