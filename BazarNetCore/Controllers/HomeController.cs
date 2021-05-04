@@ -6,20 +6,25 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BazarNetCore.Models;
+using BazarNetCore.Data;
 
 namespace BazarNetCore.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private ApplicationContex _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ApplicationContex context)
         {
             _logger = logger;
+            _context = context;
+            Trace.WriteLine(this);
         }
 
         public IActionResult Index()
         {
+            ViewBag.prodacts =  _context.Prodacts.ToList();
             return View();
         }
 

@@ -2,7 +2,35 @@
     ViewData["Title"] = "Базар";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <div class="text-center">
+        <h1 class="display-4">Добро пожаловать</h1>
+        @foreach (var item in ViewBag.prodacts)
+        {
+            <div>
+                <div>@Html.DisplayName("Название: ") @Html.DisplayName(item.Name)</div>
+                <div>@Html.DisplayName("Колличество: ") @Html.DisplayName(item.Count.ToString())</div>
+                <div>@Html.DisplayName("Тип: ") @Html.DisplayName(item.ProdactType)</div>
+                <div>@Html.DisplayName("Вес: ") @Html.DisplayName(item.Weight.ToString())</div>
+                <div>@Html.DisplayName("Цена: ") @Html.DisplayName(item.Price.ToString() + "Грн")</div>
+                <div class="img">
+                    @if (item.Image == null)
+                    {
+
+                    }
+                    else
+                    {
+                        <img class="img-thumbnail" width="350" height="250"
+                             src="@Url.Action("GetImage", "Prodacts",
+                        new { item.id })" />
+                    }
+                </div>
+                <div>
+                    <a class="btn btn-success" asp-action="Details" asp-route-id="@item.id">Детали</a>
+                    <a class="btn btn-success" asp-action="AddImageForm" asp-route-id="@item.id">Добавить картинку</a>
+                    <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.id">Редактировать</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.id">Удалить</a>
+                </div>
+            </div>
+        }
+
+    </div>
